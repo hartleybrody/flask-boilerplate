@@ -1,3 +1,19 @@
+Actual readme for this project:
+
+To make this template fit your app, replace the following
+
+ * {{APP_NAME}} -> App Name
+ * {{APP_SLUG}} -> app-name
+ * {{APP_BLURB}} -> Here is a quick blurb about the app
+
+TODO:
+ - integration tests
+ - unit tests
+ - emailing
+ - redis caching
+
+=====================
+
 # {{APP_NAME}}
 {{APP_BLURB}}
 
