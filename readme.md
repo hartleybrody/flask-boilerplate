@@ -1,5 +1,5 @@
 # {{APP_NAME}}
-Tools for people who want to manage public slack teams.
+{{APP_BLURB}}
 
 ### install python dependencies
 
