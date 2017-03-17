@@ -57,5 +57,8 @@ def login():
 
 @web.route('/logout/', methods=['GET'])
 def logout():
-    del session['user_id']
+    try:
+        del session['user_id']
+    except KeyError:
+        pass
     return redirect("/")
