@@ -6,7 +6,7 @@ dash = Blueprint('dash', __name__, template_folder="dash")
 
 @dash.route('/dashboard/', methods=['GET'])
 @login_required
-def dashboard():
+def dashboard_root():
 
     if False:
         return redirect(url_for(".some_other_view_function_name"))
