@@ -2,7 +2,7 @@ import json
 import hashlib
 from datetime import datetime, timedelta
 
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.exc import IntegrityError
 
