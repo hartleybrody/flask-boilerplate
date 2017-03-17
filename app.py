@@ -5,7 +5,7 @@ from raven.contrib.flask import Sentry
 
 from models import db
 from web.views import web as web_blueprint
-from app.views import app as app_blueprint
+from dash.views import dash as dash_blueprint
 
 app = Flask(__name__)
 app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
@@ -16,7 +16,7 @@ if os.environ.get("SENTRY_DSN"):
     sentry = Sentry(app, dsn=os.environ["SENTRY_DSN"])
 
 app.register_blueprint(web_blueprint)
-app.register_blueprint(app_blueprint)
+app.register_blueprint(dash_blueprint)
 
 @app.errorhandler(404)
 def not_found(e):

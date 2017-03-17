@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, session, flash, url_for, abort
 
-from app.utils import login_required
+from dash.utils import login_required
 
-app = Blueprint('app', __name__)
+dash = Blueprint('dash', __name__)
 
-@app.route('/dashboard/', methods=['GET'])
+@dash.route('/dashboard/', methods=['GET'])
 @login_required
 def dashboard():
     if not request.user.access_token:
