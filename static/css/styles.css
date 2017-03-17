@@ -1,0 +1,90 @@
+/*
+ * site-wide styles
+ */
+
+html, body {
+    background-color: #fefefe;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+}
+
+.highlight {
+    background-color: rgba(243,243,21,0.5);
+    padding: 2px;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*
+ * Homepage
+ */
+
+#homepage section {
+    padding: 60px 0;
+}
+
+#homepage #hero {
+    padding: 220px 0;
+    color: white;
+    background-image: url('/static/slack/slack-sf-hq.jpg');
+    background-size: cover;
+    position: relative;
+}
+
+#homepage #hero-mask {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+#homepage #hero-nav {
+    position: absolute;
+    top: 20px; right: 30px;
+}
+
+#homepage #hero-nav a {
+    color: white;
+}
+
+#homepage #hero h1 {
+    font-size: 8.0em;
+}
+
+
+/*
+ * 404
+ */
+
+#four_oh_four #hero {
+    margin: 200px 0;
+}
+
+#four_oh_four h1 {
+    font-size: 5.0em;
+}
+
+
+/*
+ * Mobile Styles
+ */
+@media (max-width: 600px){
+    #homepage section {
+        padding: 20px 0;
+    }
+    #homepage #hero {
+        padding: 80px 0 20px;
+    }
+    #homepage #hero h1 {
+        font-size: 4.0em;
+    }
+    #homepage #features .col-md-4 {
+        margin-bottom: 40px;
+    }
+}

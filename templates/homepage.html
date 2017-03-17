@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block description %}
+  {{APP_BLURB}}
+{% endblock %}
+
+{% block content %}
+
+    <div id="homepage">
+
+        <section id="hero">
+            <div id="hero-mask"></div>
+            <nav id="hero-nav">
+                <ul class="list-inline">
+                    <li>
+                        <a href="{{ url_for('web.login') }}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('web.sign_up') }}">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1>
+                            <img src="/static/images/{{APP_SLUG}}-logo.svg" id="{{APP_SLUG}}-logo" />
+                            {{APP_NAME}}
+                        </h1>
+                        <p class="lead">
+                            {{APP_BLURB}}
+                        </p>
+                    </div><!--.col-->
+                </div><!--.row-->
+            </div><!--.container-->
+        </section>
+
+        <section id="overview">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="lead">
+                            Here are the primary features
+                        </p>
+                    </div><!--.col-->
+                </div><!--.row-->
+            </div><!--.container-->
+        </section>
+
+    </div>
+
+{% endblock %}
