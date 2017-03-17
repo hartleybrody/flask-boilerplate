@@ -59,14 +59,14 @@ h1, h2, h3, h4 {
 
 
 /*
- * 404
+ * Error Pages
  */
 
-#four_oh_four #hero {
+#error_page #hero {
     margin: 200px 0;
 }
 
-#four_oh_four h1 {
+#error_page h1 {
     font-size: 5.0em;
 }
 

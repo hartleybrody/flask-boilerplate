@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <div id="four_oh_four">
+    <div id="error_page">
 
         <section id="hero">
             <div class="container">
@@ -21,9 +21,9 @@
                         <p>
                             Maybe try going to
                             {% if session['user_id'] %}
-                            <a href="{{ url_for('app.dashboard') }}">your dashboard</a>
+                            <a href="{{ url_for('app.dashboard') }}">your dashboard.</a>
                             {% else %}
-                            <a href="/">the homepage</a>
+                            <a href="/">the homepage.</a>
                             {% endif %}
                         </p>
 
