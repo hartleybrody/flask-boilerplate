@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}{% if self.title() %} | {% endif %}{{APP_NAME}}</title>
+    <link rel="icon" type="image/png" href="/static/images/{{APP_SLUG}}-logo.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+
+    {% block header %}{% endblock %}
+
+  </head>
+
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+  {% block footer %}{% endblock %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/2.1.0/pnotify.core.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/2.1.0/pnotify.core.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    PNotify.prototype.options.styling = "bootstrap3";
+    $(function(){
+      {% for category, message in messages %}
+        new PNotify({
+          title: "{{message}}",
+          type: "{{category}}",
+        });
+      {% endfor %}
+    });
+    {% endwith %}
+  </script>
+
+  <!-- insert google analytics here -->
+
+
+</html>
