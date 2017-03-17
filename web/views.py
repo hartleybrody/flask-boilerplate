@@ -34,6 +34,7 @@ def sign_up():
 
     return redirect("/dashboard/?signup=1")
 
+
 @web.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
