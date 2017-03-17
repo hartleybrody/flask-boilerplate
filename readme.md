@@ -18,6 +18,13 @@ TODO:
 {{APP_BLURB}}
 
 ### Install python dependencies
+This project assumes you already have [virtualenv, virtualenvwrapper](http://docs.python-guide.org/en/latest/dev/virtualenvs/) and [autoenv](https://github.com/kennethreitz/autoenv) installed globally on your system.
+
+First, create a new virtual environment:
+
+    mkvirtualenv {{APP_SLUG}}
+
+Then, install the required python dependencies
 
     pip install -r requirements.txt
 
