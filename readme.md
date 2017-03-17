@@ -1,12 +1,12 @@
 # {{APP_NAME}}
 {{APP_BLURB}}
 
-### install python dependencies
+### Install python dependencies
 
     pip install -r requirements.txt
 
-### setup local database
-create the database locally
+### Setup local postgres database
+Create the database locally
 
     psql -h localhost -d postgres
 
@@ -16,34 +16,38 @@ create the database locally
     postgres=# CREATE DATABASE {{APP_SLUG}};
     CREATE DATABASE
 
-if this is a brand new app, run the initial alembic setup
+If this is a brand new app, run the initial alembic setup
 
     python manage.py db init
 
-### run the local server
-ensure that the local `.env` file has been applied, then run
+Note that this has already been done for you if you're using the `Flask Template`.
+
+### Run your local server
+Ensure that the local `.env` file has been applied, then run
 
     python app.py
 
 or alternatively, use gunicorn
 
-    gunicorn app:app --reload
+    gunicorn app:app --reload --bind 127.0.0.1:5000
 
-### run database migrations
-detect changes to `models.py` and generate a migration file
+### Run database migrations
+Detect changes to `models.py` and generate a timestamped migration file
 
     python manage.py db migrate
 
-once you've looked over the generated migrations file, run the migration
+Once you've looked over the generated migrations file, apply the migration to your local database
 
     python manage.py db upgrade
 
-### deploying
-to push code changes to heroku
+### Deploying
+To push code changes to heroku
 
     git push heroku master
 
-to run database migrations on heroku
+To run database migrations on heroku
 
     heroku run python manage.py db upgrade
+
+Make sure you run this immediately after deploying any code that includes database migrations.
 
