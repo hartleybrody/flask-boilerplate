@@ -33,7 +33,7 @@ h1, h2, h3, h4 {
 #homepage #hero {
     padding: 220px 0;
     color: white;
-    background-image: url('/static/slack/slack-sf-hq.jpg');
+    background-image: url('/static/images/hero.jpg');
     background-size: cover;
     position: relative;
 }
