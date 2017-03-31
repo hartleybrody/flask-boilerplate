@@ -21,7 +21,7 @@ class BaseMixin(object):
         for k, v in cols.items():
             if isinstance(v, datetime):
                 cols[k] = v.strftime("%Y-%m-%d %H:%M:%S")
-        return cols
+        return json.dumps(cols)
 
 
 class User(db.Model, BaseMixin):
