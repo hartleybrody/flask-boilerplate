@@ -39,12 +39,6 @@ Create the database locally
     postgres=# CREATE DATABASE {{APP_SLUG}};
     CREATE DATABASE
 
-If this is a brand new app, run the initial alembic setup
-
-    python manage.py db init
-
-Note that this has already been done for you if you're using the `Flask Template`.
-
 ### Run your local server
 Ensure that the local `.env` file has been applied, then run
 
