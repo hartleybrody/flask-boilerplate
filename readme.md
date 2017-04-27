@@ -7,8 +7,6 @@ To make this template fit your app, replace the following
  * {{APP_BLURB}} -> Here is a quick blurb about the app
 
 TODO:
- - integration tests
- - unit tests
  - emailing
  - redis caching
 
@@ -56,6 +54,22 @@ Detect changes to `models.py` and generate a timestamped migration file
 Once you've looked over the generated migrations file, apply the migration to your local database
 
     python manage.py db upgrade
+
+### Testing
+You'll need to set up a separate postgres database for testing
+
+    psql -h localhost -d postgres
+
+    psql (9.4.4)
+    Type "help" for help.
+
+    postgres=# CREATE DATABASE {{APP_SLUG}}_test;
+    CREATE DATABASE
+
+To run the tests
+
+    python test.py
+
 
 ### Deploying
 To push code changes to heroku
