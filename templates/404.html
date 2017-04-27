@@ -21,7 +21,7 @@
                         <p>
                             Maybe try going to
                             {% if session['user_id'] %}
-                            <a href="{{ url_for('app.dashboard') }}">your dashboard.</a>
+                            <a href="{{ url_for('dash.dashboard_root') }}">your dashboard.</a>
                             {% else %}
                             <a href="/">the homepage.</a>
                             {% endif %}
