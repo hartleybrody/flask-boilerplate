@@ -25,6 +25,15 @@ def job(name):
     print "Running custom job: {}".format(name)
 
 
+@manager.command
+def seed():
+    u = User(email="test@example.com", is_admin=False)
+    u.set_password("foobar123")
+
+    db.session.add(u)
+    db.session.commit()
+
+
 @manager.option("-e", "--email", dest="email", default=None)
 @manager.option("-p", "--pass", dest="password", default=None)
 def admin(email, password):
