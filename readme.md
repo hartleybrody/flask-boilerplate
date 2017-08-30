@@ -8,7 +8,6 @@ To make this template fit your app, replace the following
 
 TODO:
  - emailing
- - redis caching
 
 =====================
 
@@ -31,7 +30,7 @@ Create the database locally
 
     psql -h localhost -d postgres
 
-    psql (9.4.4)
+    psql (9.6.4)
     Type "help" for help.
 
     postgres=# CREATE DATABASE {{APP_SLUG}};
