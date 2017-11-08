@@ -36,6 +36,20 @@ Create the database locally
     postgres=# CREATE DATABASE {{APP_SLUG}};
     CREATE DATABASE
 
+
+### Setup local redis server
+Most web applications can benefit from an in-memory cache. They're great for server-side sessions and also for taking load off the database.
+
+You can install redis using [the project's Quickstart instructions](https://redis.io/topics/quickstart).
+
+Or, if you're on macOs with homebrew, you can simply run
+
+    brew install redis
+
+Once you've got redis installed on your system, start the local server in the background with
+
+    redis-server  --daemonize yes
+
 ### Run your local server
 Ensure that the local `.env` file has been applied, then run
 
