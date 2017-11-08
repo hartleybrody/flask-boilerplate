@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template
 from raven.contrib.flask import Sentry
+from flask_session import Session
 
 from models import db
 from web.views import web as web_blueprint
@@ -11,6 +12,11 @@ app = Flask(__name__)
 app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# server-side sessions
+app.config['SESSION_TYPE'] = 'redis'
+sess = Session()
+sess.init_app(app)
 
 if os.environ.get("SENTRY_DSN"):
     sentry = Sentry(app, dsn=os.environ["SENTRY_DSN"])
@@ -27,6 +33,7 @@ def server_error(e):
     return render_template("500.html"), 500
 
 db.init_app(app)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
