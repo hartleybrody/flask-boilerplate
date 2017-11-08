@@ -13,10 +13,12 @@ app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# server-side sessions
-app.config['SESSION_TYPE'] = 'redis'
-sess = Session()
-sess.init_app(app)
+if os.environ.get("REDIS_URL"):
+    from cache import redis_connection
+    app.config['SESSION_TYPE'] = 'redis'
+    app.config['SESSION_REDIS'] = redis_connection
+    sess = Session()
+    sess.init_app(app)
 
 if os.environ.get("SENTRY_DSN"):
     sentry = Sentry(app, dsn=os.environ["SENTRY_DSN"])
