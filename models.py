@@ -16,12 +16,12 @@ class BaseMixin(object):
     created_at =    db.Column(db.DateTime, default=datetime.utcnow)
     updated_at =    db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    def to_json(self):
+    def to_dict(self):
         cols = {c.name: getattr(self, c.name) for c in self.__table__.columns}
         for k, v in cols.items():
             if isinstance(v, datetime):
                 cols[k] = v.strftime("%Y-%m-%d %H:%M:%S")
-        return json.dumps(cols)
+        return cols
 
 
 class User(db.Model, BaseMixin):
