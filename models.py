@@ -27,8 +27,8 @@ class BaseMixin(object):
 class User(db.Model, BaseMixin):
     __tablename__ = "users"
 
-    email =         db.Column(db.String(256), unique=True)
-    password =      db.Column(db.String(256))
+    email =         db.Column(db.String(256), nullable=False, unique=True)
+    password =      db.Column(db.String(256), nullable=False)
     is_admin =      db.Column(db.Boolean())
 
     def set_password(self, password):
