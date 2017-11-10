@@ -6,7 +6,7 @@ web = Blueprint('web', __name__)
 
 @web.route('/', methods=['GET'])
 def homepage():
-    return render_template("homepage.html")
+    return render_template("web/homepage.html")
 
 
 @web.route('/sign-up/', methods=['GET', 'POST'])
@@ -17,7 +17,7 @@ def sign_up():
         return redirect("/dashboard/")
 
     if request.method == 'GET':
-        return render_template("sign-up.html")
+        return render_template("web/sign-up.html")
 
     u = User(email=request.form.get('email'))
     u.set_password(request.form.get('password'))
@@ -41,7 +41,7 @@ def login():
         if session.get('user_id'):
             flash("You're already logged in", "success")
             return redirect("/dashboard/")
-        return render_template("login.html")
+        return render_template("web/login.html")
 
     u = User.query.filter_by(email=request.form.get("email")).first()
     if not u:
