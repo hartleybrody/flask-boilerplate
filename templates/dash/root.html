@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <div id="dash-root">
+    <div id="dash-root" ng-app="DashRootApp" ng-controller="DashRootController as app">
 
         <section id="section_slug">
             <div class="container">
@@ -23,4 +23,11 @@
 
     </div>
 
+{% endblock %}
+
+{% block footer %}
+    <script type="text/javascript">
+        window.js_init = {{ js_init | safe}}
+    </script>
+    <script type="text/javascript" src="/static/js/dash-root.js"></script>
 {% endblock %}
