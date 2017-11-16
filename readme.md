@@ -30,7 +30,7 @@ Create the database locally
 
     psql -h localhost -d postgres
 
-    psql (9.6.4)
+    psql (10.1)
     Type "help" for help.
 
     postgres=# CREATE DATABASE {{APP_SLUG}};
