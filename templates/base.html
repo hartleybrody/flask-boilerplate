@@ -34,17 +34,24 @@
 
     {% block footer %}{% endblock %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/2.1.0/pnotify.core.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/2.1.0/pnotify.core.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.nonblock.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.nonblock.css" type="text/css">
+
     <script type="text/javascript">
     {% with messages = get_flashed_messages(with_categories=true) %}
     PNotify.prototype.options.styling = "bootstrap3";
     $(function(){
-      {% for category, message in messages %}
-        new PNotify({
-          title: "{{message}}",
-          type: "{{category}}",
-        });
+        {% for category, message in messages %}
+            new PNotify({
+                title: "{{category|capitalize}}",
+                text: "{{message}}",
+                type: "{{category}}",
+                nonblock: {
+                    nonblock: true
+                }
+            });
       {% endfor %}
     });
     {% endwith %}
