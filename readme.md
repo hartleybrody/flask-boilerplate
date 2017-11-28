@@ -6,9 +6,6 @@ To make this template fit your app, replace the following
  * {{APP_SLUG}} -> app-name
  * {{APP_BLURB}} -> Here is a quick blurb about the app
 
-TODO:
- - emailing
-
 =====================
 
 # {{APP_NAME}}
