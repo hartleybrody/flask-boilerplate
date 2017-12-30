@@ -20,7 +20,11 @@ def sign_up():
     if request.method == 'GET':
         return render_template("web/sign-up.html")
 
-    u = User(email=request.form.get('email'))
+    u = User(
+        name=request.form.get('name'),
+        email=request.form.get('email'),
+        is_admin=False
+    )
     u.set_password(request.form.get('password'))
     try:
         db.session.add(u)
@@ -33,7 +37,7 @@ def sign_up():
     flash("Thanks for signing up!", "success")
     session['user_id'] = u.id
 
-    WelcomeEmail(u.email, dict(user=u))
+    # WelcomeEmail(u.email, dict(user=u))
 
     return redirect(url_for("dash.root", signup=1))
 

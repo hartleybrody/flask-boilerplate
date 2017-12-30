@@ -31,6 +31,7 @@ class BaseMixin(object):
 class User(db.Model, BaseMixin):
     __tablename__ = "users"
 
+    name =          db.Column(db.String(256), nullable=False)
     email =         db.Column(db.String(256), nullable=False, unique=True)
     password =      db.Column(db.String(256), nullable=False)
 
