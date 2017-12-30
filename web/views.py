@@ -1,7 +1,10 @@
+import random
+from datetime import datetime, timedelta
+
 from flask import Blueprint, render_template, request, redirect, session, flash, url_for
 
 from models import db, IntegrityError, User
-from emails import WelcomeEmail
+from emails import WelcomeEmail, PasswordResetEmail
 
 web = Blueprint('web', __name__)
 
@@ -76,3 +79,63 @@ def logout():
     except KeyError:
         pass
     return redirect(url_for("web.homepage"))
+
+
+@web.route('/reset/email/', methods=['GET', 'POST'])
+def reset_email():
+    # step 1 of password reset, provide email address
+
+    if request.method == "GET":
+        return render_template("web/reset-email.html")
+
+    email = request.form.get("email")
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        flash("No user with that email address", "error")
+        return redirect(url_for("web.reset_email"))
+
+    user.password_reset_hash = hex(random.getrandbits(128))[2:-1]
+    user.password_reset_at = datetime.utcnow()
+
+    db.session.add(user)
+    db.session.commit()
+
+    PasswordResetEmail(user.email, dict(user=user))
+
+    flash("A password reset email has been sent to that address", "success")
+    return redirect(url_for("web.reset_email"))
+
+
+@web.route('/reset/password/', methods=['GET', 'POST'])
+def reset_password():
+    # step 2 of password reset, click link in email
+
+    reset_hash = request.args.get("hash")
+    cutoff = datetime.utcnow() - timedelta(hours=24)  # link is valid for 24 hours
+
+    user = User.query.filter_by(password_reset_hash=reset_hash).filter(User.password_reset_at > cutoff).first()
+
+    if not user:
+        flash("Invalid reset token, please try again", "error")
+        return redirect(url_for("web.reset_email"))
+
+    if request.method == "GET":
+        return render_template("web/reset-password.html", user=user)
+
+    password = request.form.get("password")
+
+    if not password == request.form.get("confirm_password"):
+        flash("Those passwords didn't match", "error")
+        return redirect(url_for("web.reset_password", hash=request.args.get("hash")))
+
+    user.set_password(password)
+    user.password_reset_hash = None
+    user.password_reset_at = None
+
+    db.session.add(user)
+    db.session.commit()
+
+    flash("Successfully updated your password", "success")
+    return redirect(url_for("web.login"))
+

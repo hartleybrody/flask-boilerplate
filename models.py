@@ -38,6 +38,9 @@ class User(db.Model, BaseMixin):
     last_seen_at =  db.Column(db.DateTime)
     is_admin =      db.Column(db.Boolean())
 
+    password_reset_hash =   db.Column(db.String(32))
+    password_reset_at =     db.Column(db.DateTime)
+
     def set_password(self, password):
         self.password = pwd_context.encrypt(password)
 

@@ -23,7 +23,9 @@
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                             </div>
                             <input type="submit" value="Login &rarr;" class="btn btn-primary btn-lg pull-right" />
-                            <span class="pull-left">Need an account? <a href="{{ url_for('web.sign_up') }}">Sign up now.</a></span>
+
+                            Need an account? <a href="{{ url_for('web.sign_up') }}">Sign up now.</a><br>
+                            Forogt your password? <a href="{{ url_for('web.reset_email') }}">Reset it here.</a>
                         </form>
                     </div><!--.col-->
                 </div><!--.row-->

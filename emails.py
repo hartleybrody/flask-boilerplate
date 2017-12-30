@@ -58,3 +58,11 @@ class WelcomeEmail(BaseEmail):
     def get_subject(self, user, **kwargs):  # non-used context keys can be swallowed w **kwargs
         return "Welcome, {}".format(user.email)
 
+
+class PasswordResetEmail(BaseEmail):
+
+    required_context = ["user"]
+    template_path = "email/password-reset.html"
+
+    def get_subject(self, **kwargs):  # non-used context keys can be swallowed w **kwargs
+        return "Your password reset link"
