@@ -23,6 +23,10 @@ class BaseMixin(object):
                 cols[k] = v.strftime("%Y-%m-%d %H:%M:%S")
         return cols
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
 
 class User(db.Model, BaseMixin):
     __tablename__ = "users"
