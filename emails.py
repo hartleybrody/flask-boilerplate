@@ -7,6 +7,7 @@ from flask import render_template
 class BaseEmail(object):
 
     send_from = "admin@example.com"
+    translate_newlines = True
 
     def __init__(self, send_to, context):
 
@@ -20,6 +21,8 @@ class BaseEmail(object):
 
 
         html = render_template(self.template_path, **context)
+        if self.translate_newlines:
+            html = html.replace("\n", "<br>\n")
 
         return self.send(
             send_to,
@@ -33,6 +36,7 @@ class BaseEmail(object):
 
     def send(self, send_to, send_from, subject, html):
         print subject
+        print html
         endpoint = "https://api.mailgun.net/v3/{domain}/messages".format(domain=os.environ["MAILGUN_DOMAIN"])
         r = requests.post(
             endpoint,
@@ -52,5 +56,5 @@ class WelcomeEmail(BaseEmail):
     template_path = "email/welcome.html"
 
     def get_subject(self, user, **kwargs):  # non-used context keys can be swallowed w **kwargs
-        return "Welcome, {}".format(user["email"])
+        return "Welcome, {}".format(user.email)
 

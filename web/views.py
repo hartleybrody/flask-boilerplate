@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, session, flash, url_for
 
 from models import db, IntegrityError, User
+from emails import WelcomeEmail
 
 web = Blueprint('web', __name__)
 
@@ -31,6 +32,8 @@ def sign_up():
 
     flash("Thanks for signing up!", "success")
     session['user_id'] = u.id
+
+    WelcomeEmail(u.email, dict(user=u))
 
     return redirect(url_for("dash.root", signup=1))
 
