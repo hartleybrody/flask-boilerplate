@@ -1,20 +1,12 @@
-angular.module('DashRootApp', [])
-    .controller('DashRootController', function($scope, $timeout, $interval, $location) {
+BaseApp.controller('DashRootController', function($scope, $timeout, $interval, $location, $controller) {
 
-        var app = this;
+    var app = this;
+    angular.extend(app, $controller('BaseController', {$scope: $scope}));
 
-        app.init = function(){
+    app.init = function(){
+        app.base_init()
 
-            $scope.users = window.js_init.users;
-            console.log($scope.users)
+    }
 
-        }
-
-        // always call this last, after every other function has been defined
-        app.init();
-    })
-    .filter('safe', function($sce) {
-        return function(val) {
-            return $sce.trustAsHtml(val);
-        };
-    })
+    app.init();  // always call this last
+})

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <div id="dash-root" ng-app="DashRootApp" ng-controller="DashRootController as app">
+    <div id="dash-root" ng-app="BaseApp" ng-controller="DashRootController as app">
 
         <section id="section_slug">
             <div class="container">
@@ -21,13 +21,22 @@
             </div><!--.container-->
         </section>
 
+        {% raw %}
+        <section id="users">
+            <div class="container">
+                <div class="row" ng-repeat="u in users">
+                    <div class="col-md-12 text-center">
+                        {{u.email | safe}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endraw %}
+
     </div>
 
 {% endblock %}
 
 {% block footer %}
-    <script type="text/javascript">
-        window.js_init = {{ js_init | safe}}
-    </script>
     <script type="text/javascript" src="/static/js/dash-root.js"></script>
 {% endblock %}
