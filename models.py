@@ -33,6 +33,8 @@ class User(db.Model, BaseMixin):
 
     email =         db.Column(db.String(256), nullable=False, unique=True)
     password =      db.Column(db.String(256), nullable=False)
+
+    last_seen_at =  db.Column(db.DateTime)
     is_admin =      db.Column(db.Boolean())
 
     def set_password(self, password):

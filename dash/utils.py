@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from functools import wraps
 from flask import request, redirect, session, flash
 
@@ -11,6 +13,10 @@ def login_required(f):
             flash("You must be logged in to view that.", "error")
             return redirect(url_for("web.login"))
         request.user = User.query.filter_by(id=session['user_id']).first()
+
+        request.user.last_seen_at = datetime.utcnow()
+        request.user.save()
+
         if request.user.is_admin and request.args.get("m"):
             request.user = User.query.filter_by(id=request.args.get("m")).first()
         return f(*args, **kwargs)
