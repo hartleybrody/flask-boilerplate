@@ -11,7 +11,7 @@
       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
       <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+      <link rel="stylesheet" type="text/css" href="/static/css/styles.css?c={{config.static_last_update}}">
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
@@ -49,6 +49,7 @@
     <script type="text/javascript">
     {% with messages = get_flashed_messages(with_categories=true) %}
     PNotify.prototype.options.styling = "bootstrap3";
+    PNotify.prototype.options.delay = 2500;
     $(function(){
         {% for category, message in messages %}
             new PNotify({
