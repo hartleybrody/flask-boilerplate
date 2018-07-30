@@ -41,7 +41,7 @@ for directory in os.walk("static/"):
         if updated_at > static_last_update:
             static_last_update = updated_at
 app.config['static_last_update'] = str(int(static_last_update))[-6:]
-print app.config['static_last_update']
+
 
 @app.errorhandler(404)
 def not_found(e):
