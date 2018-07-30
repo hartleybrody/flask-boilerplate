@@ -26,6 +26,7 @@ class BaseMixin(object):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        return self
 
 
 class User(db.Model, BaseMixin):
