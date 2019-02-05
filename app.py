@@ -55,6 +55,18 @@ def not_found(e):
 def server_error(e):
     return render_template("500.html"), 500
 
+@app.after_request
+def apply_security_headers(response):
+
+    # don't allow the site to load in an iframe (prevents click jacking)
+    response.headers["X-Frame-Options"] = "DENY"
+
+    # don't allow browsers to auto-detect mime type
+    # they should trust the `Content-Type` header with each response
+    response.headers["X-Content-Type-Options"] = "nosniff"
+
+    return response
+
 db.init_app(app)
 
 
