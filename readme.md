@@ -56,6 +56,27 @@ or alternatively, use gunicorn
 
     gunicorn app:app --reload --bind 127.0.0.1:5000
 
+### Running your local server over SSL (optional)
+Running your local development server over SSL is optional but highly recommended since it makes your local env closer to prod, and allows you to catch potential content issues sooner. I recommend [mkcert](https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/) for creating browser-trusted, self-signed certificates.
+
+First, install mkcert
+
+    brew install mkcert
+    brew install nss
+
+Then, allow it to install a locally-trusted CA
+
+    mkcert -install
+
+Finally, generate a certificate for the local domain you'll be using:
+
+    mkcert local.{{APP_SLUG}}.com
+
+This will generate a certificate and key in the current directory. You can move them wherever you like, just make sure to update the env variables to point to their file system location, and then uncomment out the line at the very bottom of `app.py` that tells your local server to use them.
+
+    app.run(debug=True, ssl_context=(os.environ["LOCAL_SSL_CERT_PATH"], os.environ["LOCAL_SSL_KEY_PATH"]))
+
+
 ### Run database migrations
 Detect changes to `models.py` and generate a timestamped migration file
 

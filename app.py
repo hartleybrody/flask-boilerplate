@@ -72,3 +72,7 @@ db.init_app(app)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+    # to run your local development server over SSL (recommened for finding content issues)
+    # https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/
+    # app.run(debug=True, ssl_context=(os.environ["LOCAL_SSL_CERT_PATH"], os.environ["LOCAL_SSL_KEY_PATH"]))
