@@ -13,6 +13,10 @@ app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# secure the session cookies
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+
 if os.environ.get("REDIS_URL"):
     from cache import redis_connection
     app.config['SESSION_TYPE'] = 'redis'
