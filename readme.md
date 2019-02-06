@@ -86,6 +86,10 @@ Once you've looked over the generated migrations file, apply the migration to yo
 
     python manage.py db upgrade
 
+To roll back the most recent migration that has been applied to the database (maybe due to errors or changes)
+
+    python manage.py db downgrade -1
+
 ### Testing
 You'll need to set up a separate postgres database for testing
 
