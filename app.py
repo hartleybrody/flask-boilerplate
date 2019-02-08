@@ -12,10 +12,12 @@ app = Flask(__name__)
 app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
 
 # secure the session cookies
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = "Lax"
 
 if os.environ.get("REDIS_URL"):
     from cache import redis_connection
@@ -65,9 +67,14 @@ def apply_security_headers(response):
     # they should trust the `Content-Type` header with each response
     response.headers["X-Content-Type-Options"] = "nosniff"
 
-    return response
+    # prevents the browser from rendering the page if it detects a reflected JS/XSS attack
+    # this is default behavior in most modern browsers, but good to be explicit for older browsers
+    response.headers["X-XSS-Protection"] = "1; mode=block"
 
-db.init_app(app)
+    # instructs the browser to make all requests to this site over SSL (aka HSTS)
+    # response.headers["Strict-Transport-Security"] = "max-age=31536000 includeSubDomains"  # one year
+
+    return response
 
 
 if __name__ == '__main__':
