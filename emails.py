@@ -35,8 +35,8 @@ class BaseEmail(object):
         return NotImplementedError("Subclasses must define their own subject methods")
 
     def send(self, send_to, send_from, subject, html):
-        print subject
-        print html
+        print(subject)
+        print(html)
         endpoint = "https://api.mailgun.net/v3/{domain}/messages".format(domain=os.environ["MAILGUN_DOMAIN"])
         r = requests.post(
             endpoint,

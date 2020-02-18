@@ -17,7 +17,7 @@ manager.add_command('db', MigrateCommand)
 
 @manager.option("-n", "--name", dest="name", default="Undefined")
 def job(name):
-    print "Running custom job: {}".format(name)
+    print("Running custom job: {}".format(name))
 
 
 @manager.command
@@ -45,7 +45,7 @@ def admin(email, password):
         return "Successfully added {} with that password".format(email)
     except IntegrityError:
         db.session.rollback()
-        print "Admin with that email already exists, updating their password"
+        print("Admin with that email already exists, updating their password")
 
         u = User.query.filter_by(email=email).one()
         u.set_password(password)

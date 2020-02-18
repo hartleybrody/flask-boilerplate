@@ -1,5 +1,5 @@
 import os
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 import redis
 
@@ -40,5 +40,5 @@ redis = RedisCache()
 if __name__ == '__main__':
     # test connection
     redis.set('test:hartley', 'rulez')
-    print redis.get('test:hartley')
+    print(redis.get('test:hartley'))
     # redis.delete_pattern("test:*")
