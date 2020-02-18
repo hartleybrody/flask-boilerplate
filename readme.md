@@ -16,7 +16,7 @@ This project assumes you already have [virtualenv, virtualenvwrapper](http://doc
 
 First, create a new virtual environment:
 
-    mkvirtualenv {{APP_SLUG}}
+    mkvirtualenv -p python3 {{APP_SLUG}}
 
 Then, install the required python dependencies
 
@@ -27,7 +27,7 @@ Create the database locally
 
     psql -h localhost -d postgres
 
-    psql (10.1)
+    psql (11.1)
     Type "help" for help.
 
     postgres=# CREATE DATABASE {{APP_SLUG}};
@@ -39,7 +39,7 @@ Most web applications can benefit from an in-memory cache. They're great for ser
 
 You can install redis using [the project's Quickstart instructions](https://redis.io/topics/quickstart).
 
-Or, if you're on macOs with homebrew, you can simply run
+Or, if you're on macOS with homebrew, you can simply run
 
     brew install redis
 
