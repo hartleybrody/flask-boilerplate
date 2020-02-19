@@ -50,6 +50,6 @@ class User(db.Model, BaseMixin):
 
     def gravatar_url(self, size=200):
         return "https://www.gravatar.com/avatar/{md5}?size={size}".format(
-            md5=hashlib.md5(self.email).hexdigest(),
+            md5=hashlib.md5(self.email.encode('utf-8')).hexdigest(),
             size=size
         )
