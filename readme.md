@@ -76,6 +76,26 @@ This will generate a certificate and key in the current directory. You can move 
 
     app.run(debug=True, ssl_context=(os.environ["LOCAL_SSL_CERT_PATH"], os.environ["LOCAL_SSL_KEY_PATH"]))
 
+In order to access the local development server with the correct SSL certificates, you'll need to create an entry in your HOSTS file that points `local.{{APP_SLUG}}.com` at the regular loopback interface (127.0.0.1)
+
+On macOS, you can add an entry to your HOSTS file with:
+
+    sudo vim /etc/hosts
+
+and then append a line to the end of the file that looks like
+
+     127.0.0.1 local.{{APP_SLUG}}.com
+
+Then exit vim with the famous `esc` + `:wq` and you should be able to visit the site over SSL in your browser at
+
+    https://local.{{APP_SLUG}}.com:5000
+
+Once you've gotten SSL setup and running locally, you can add a "Hyper-Strict Transport Security" (HSTS) header to force the browser to always request the site over SSL. Simply uncommenting out the line in app.py that looks like
+
+    response.headers["Strict-Transport-Security"] = "max-age=31536000 includeSubDomains"
+
+WARNING: Once you uncomment this header and visit the site, your browser will *always* request the site over SSL for one year and there is *no way to force your browser to request the site over plain ol' HTTP*. This is a good security best practice, but can present a mucky situation if you haven't gotten the SSL setup stuff figured out.
+
 
 ### Run database migrations
 Detect changes to `models.py` and generate a timestamped migration file
