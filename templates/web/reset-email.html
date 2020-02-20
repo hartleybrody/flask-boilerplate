@@ -6,28 +6,23 @@
 
 {% block content %}
 
-    <div id="reset-email">
-
-        <section id="hero">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <h2>Reset Password</h2>
+    <div id="reset-email" class="h-100">
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-6">
+                    <h2>Reset Password</h2>
+                    <hr>
+                    <form class="form" method="post">
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+                        </div>
                         <hr>
-                        <form class="form" method="post">
-                            <div class="form-group">
-                                <label for="email">Your Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
-                            </div>
-                            <hr>
-                            <a href="{{ url_for('web.login') }}">Back to Login</a>
-                            <input type="submit" value="Send Reset Token" class="btn btn-primary pull-right" />
-                        </form>
-                    </div><!--.col-->
-                </div><!--.row-->
-            </div><!--.container-->
-        </section>
-
+                        <input type="submit" value="Send Reset Token" class="btn btn-primary pull-right" />
+                    </form>
+                </div><!--.col-->
+            </div><!--.row-->
+        </div><!--.container-->
     </div>
 
 {% endblock %}
