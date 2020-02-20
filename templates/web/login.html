@@ -6,31 +6,28 @@
 
 {% block content %}
 
-    <div id="login">
+    <div id="login" class="h-100">
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-6">
+                    <h2>Login</h2>
+                    <form class="form" method="post">
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Your Password</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                        </div>
+                        <input type="submit" value="Login &rarr;" class="btn btn-primary btn-lg pull-right" />
 
-        <section id="hero">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <h2>Login</h2>
-                        <form class="form" method="post">
-                            <div class="form-group">
-                                <label for="email">Your Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email Address">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Your Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                            </div>
-                            <input type="submit" value="Login &rarr;" class="btn btn-primary btn-lg pull-right" />
-
-                            Need an account? <a href="{{ url_for('web.sign_up') }}">Sign up now.</a><br>
-                            Forogt your password? <a href="{{ url_for('web.reset_email') }}">Reset it here.</a>
-                        </form>
-                    </div><!--.col-->
-                </div><!--.row-->
-            </div><!--.container-->
-        </section>
+                        Need an account? <a href="{{ url_for('web.sign_up') }}">Sign up now.</a><br>
+                        Forogt your password? <a href="{{ url_for('web.reset_email') }}">Reset it here.</a>
+                    </form>
+                </div><!--.col-->
+            </div><!--.row-->
+        </div><!--.container-->
 
     </div>
 
