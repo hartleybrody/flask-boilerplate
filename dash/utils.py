@@ -12,7 +12,11 @@ def login_required(f):
         if 'user_id' not in session or session['user_id'] is None:
             flash("You must be logged in to view that.", "error")
             return redirect(url_for("web.login"))
-        request.user = User.query.filter_by(id=session['user_id']).first()
+        try:
+            request.user = User.query.filter_by(id=session['user_id']).one()
+        except:
+            flash("There was an issue with your session, please login again", "error")
+            return redirect(url_for("web.logout"))
 
         request.user.last_seen_at = datetime.utcnow()
         request.user.save()
