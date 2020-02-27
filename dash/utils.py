@@ -21,8 +21,5 @@ def login_required(f):
         request.user.last_seen_at = datetime.utcnow()
         request.user.save()
 
-        if request.user.is_admin and request.args.get("m"):
-            request.user = User.query.filter_by(id=request.args.get("m")).first()
         return f(*args, **kwargs)
     return func
-
