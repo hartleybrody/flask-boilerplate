@@ -20,7 +20,6 @@ Mako
 MarkupSafe
 packaging
 passlib
-psycopg2
 psycopg2-binary
 pyparsing
 python-dateutil
