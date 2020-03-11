@@ -43,7 +43,7 @@ class User(db.Model, BaseMixin):
     password_reset_at =     db.Column(db.DateTime)
 
     def set_password(self, password):
-        self.password = pwd_context.encrypt(password)
+        self.password = pwd_context.hash(password)
 
     def verify_password(self, password):
         return pwd_context.verify(password, self.password)
