@@ -12,11 +12,17 @@
             <div id="hero-mask"></div>
             <nav id="hero-nav">
                 <ul class="list-inline">
-                    <li>
-                        <a href="{{ url_for('web.login') }}">Login</a>
+                    <li class="list-inline-item">
+                        <a href="{{ url_for('web.login') }}" class="btn btn-outline-dark">
+                            <i class="fa fa-sign-in"></i>
+                            Login
+                        </a>
                     </li>
-                    <li>
-                        <a href="{{ url_for('web.sign_up') }}">Sign up</a>
+                    <li class="list-inline-item">
+                        <a href="{{ url_for('web.sign_up') }}" class="btn btn-outline-dark">
+                            <i class="fa fa-user-plus"></i>
+                            Sign up
+                        </a>
                     </li>
                 </ul>
             </nav>
