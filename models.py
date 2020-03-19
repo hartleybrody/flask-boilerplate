@@ -42,6 +42,13 @@ class User(db.Model, BaseMixin):
     password_reset_hash =   db.Column(db.String(32))
     password_reset_at =     db.Column(db.DateTime)
 
+    def to_dict(self):
+        d = super(User, self).to_dict()
+        del d["password"]
+        del d["password_reset_hash"]
+        del d["password_reset_at"]
+        return d
+
     def set_password(self, password):
         self.password = pwd_context.hash(password)
 
