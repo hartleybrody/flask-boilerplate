@@ -49,6 +49,10 @@ for directory in os.walk("static/"):
 app.config['static_last_update'] = str(int(static_last_update))[-6:]
 
 
+@app.template_filter('snake_to_title')
+def snake_to_title(s):
+    return " ".join([word.title() for word in s.split("_")])
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html"), 404
