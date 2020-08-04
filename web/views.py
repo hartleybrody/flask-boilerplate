@@ -139,3 +139,12 @@ def reset_password():
     flash("Successfully updated your password", "success")
     return redirect(url_for("web.login"))
 
+
+@web.route('/_ping/', methods=['GET'])
+def ping():
+    u = [_ for _ in User.query.all()]  # do a DB query to ensure those work
+    return "ok"
+
+@web.route('/_exception/', methods=['GET'])
+def exception():
+    raise Exception("You want an exception? You got one!")
