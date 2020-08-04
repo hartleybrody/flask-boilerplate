@@ -53,6 +53,11 @@ app.config['static_last_update'] = str(int(static_last_update))[-6:]
 def snake_to_title(s):
     return " ".join([word.title() for word in s.split("_")])
 
+@app.template_filter('env')
+def env(default_value, key):
+    # usage in template: {{ 'default_value' | env('KEY_NAME') }}
+    return os.getenv(key, default_value)
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html"), 404
