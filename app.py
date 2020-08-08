@@ -81,7 +81,7 @@ def apply_security_headers(response):
     response.headers["X-XSS-Protection"] = "1; mode=block"
 
     # instructs the browser to make all requests to this site over SSL (aka HSTS)
-    # response.headers["Strict-Transport-Security"] = "max-age=31536000 includeSubDomains"  # one year
+    # response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"  # one year
 
     return response
 
