@@ -14,7 +14,7 @@ To make this template fit your app, replace the following
 ### Install python dependencies
 This project assumes you already have [virtualenv, virtualenvwrapper](http://docs.python-guide.org/en/latest/dev/virtualenvs/) and [autoenv](https://github.com/kennethreitz/autoenv) installed globally on your system.
 
-First, create a new virtual environment:
+First, create a new virtual environment using python3:
 
     mkvirtualenv -p python3 {{APP_SLUG}}
 
@@ -92,9 +92,9 @@ Then exit vim with the famous `esc` + `:wq` and you should be able to visit the 
 
 Once you've gotten SSL setup and running locally, you can add a "Hyper-Strict Transport Security" (HSTS) header to force the browser to always request the site over SSL. Simply uncommenting out the line in app.py that looks like
 
-    response.headers["Strict-Transport-Security"] = "max-age=31536000 includeSubDomains"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains
 
-WARNING: Once you uncomment this header and visit the site, your browser will *always* request the site over SSL for one year and there is *no way to force your browser to request the site over plain ol' HTTP*. This is a good security best practice, but can present a mucky situation if you haven't gotten the SSL setup stuff figured out.
+**WARNING**: Once you uncomment this header and visit the site, your browser will *always* request the site over SSL for one year and there is *no way to force your browser to request the site over plain ol' HTTP*. This is a good security best practice, but can present a mucky situation if you haven't gotten the SSL setup stuff figured out.
 
 
 ### Run database migrations
