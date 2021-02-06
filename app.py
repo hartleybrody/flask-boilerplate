@@ -1,7 +1,7 @@
 import os
 
+import sentry_sdk
 from flask import Flask, render_template
-from raven.contrib.flask import Sentry
 from flask_session import Session
 
 from models import db
@@ -30,7 +30,7 @@ if os.environ.get("REDIS_URL"):
     sess.init_app(app)
 
 if os.environ.get("SENTRY_DSN"):
-    sentry = Sentry(app, dsn=os.environ["SENTRY_DSN"])
+    sentry = sentry_sdk.init(dsn=os.environ["SENTRY_DSN"])
 
 app.register_blueprint(web_blueprint)
 app.register_blueprint(dash_blueprint)

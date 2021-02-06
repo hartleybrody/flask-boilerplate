@@ -25,9 +25,9 @@ pyparsing
 python-dateutil
 python-dotenv
 python-editor
-raven
 redis
 requests
+sentry-sdk
 six
 SQLAlchemy
 urllib3
