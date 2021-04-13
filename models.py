@@ -28,6 +28,11 @@ class BaseMixin(object):
         db.session.commit()
         return self
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
 
 class User(db.Model, BaseMixin):
     __tablename__ = "users"
