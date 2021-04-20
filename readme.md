@@ -27,11 +27,22 @@ Create the database locally
 
     psql -h localhost -d postgres
 
-    psql (11.1)
+    psql (13.1)
     Type "help" for help.
 
     postgres=# CREATE DATABASE {{APP_SLUG}};
     CREATE DATABASE
+
+### Initial database setup
+Once you've created a brand new database, apply the existing migrations to get your database tables setup properly
+
+    python manage.py db upgrade
+
+Note that the current schema is defined in `models.py` and the migrations live in `migrations/versions` (see below)
+
+You'll also need to do an initial "seed" command to add some placeholder rows to the database
+
+    python manage.py seed
 
 
 ### Setup local redis server
