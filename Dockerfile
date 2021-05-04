@@ -7,16 +7,15 @@ FROM python:3.8.9
 # apk add --no-cache postgresql-libs && \
 # apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
 
-# EXPOSE 80
-EXPOSE 8080
-
 WORKDIR /flask-app
 
 COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD ["gunicorn", "app:app", "--log-file=-", "-b 0.0.0.0:80"]
+# used by gunicorn https://docs.gunicorn.org/en/stable/settings.html#bind
+ENV PORT 80
 
-#ENTRYPOINT [ "python" ]
-#CMD [ "app.py" ]
+# allows for passing extra flags to gunicorn at container runtime
+# https://phoenixnap.com/kb/docker-cmd-vs-entrypoint
+ENTRYPOINT [ "gunicorn", "app:app" ]
