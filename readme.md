@@ -126,7 +126,7 @@ You'll need to set up a separate postgres database for testing
 
     psql -h localhost -d postgres
 
-    psql (9.4.4)
+    psql (13.1)
     Type "help" for help.
 
     postgres=# CREATE DATABASE {{APP_SLUG}}_test;
