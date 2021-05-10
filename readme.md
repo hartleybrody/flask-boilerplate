@@ -148,3 +148,32 @@ To run database migrations on heroku
 
 Make sure you run this immediately after deploying any code that includes database migrations.
 
+### Setup local environment with docker
+Run `docker build` to build an image from the `Dockerfile`
+
+    docker build --tag {{APP_SLUG}} .
+
+Verify the image was created by running `docker images`
+
+Then you can actually run your image as a container with
+
+    docker run -p 8000:80 --env-file .env --name web {{APP_SLUG}}    # todo, use docker compose instead of --env-file
+
+Add the `-d` flag just  before `{{APP_SLUG}}` to detach and run the container in the background
+
+Note that the `docker run` command is equivalent to running `docker create` + `docker start` + `docker attach`
+
+Verify the container is working by running `docker ps` in a different terminal tab
+
+Verify that the app loads with
+
+    curl localhost:8000
+
+You can follow the logs for the container with
+
+    docker logs -f web
+
+You can "ssh into" a running container with
+
+    docker exec -it web /bin/bash
+
