@@ -1,12 +1,5 @@
 FROM python:3.9.5
 
-#FROM python:alpine3.7
-#RUN apk update
-#RUN apk add postgresql-dev gcc python3-dev musl-dev
-#RUN \
-# apk add --no-cache postgresql-libs && \
-# apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
-
 WORKDIR /flask-app
 
 COPY . .
