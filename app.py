@@ -3,6 +3,7 @@ import os
 import sentry_sdk
 from flask import Flask, render_template
 from flask_session import Session
+from flask_talisman import Talisman
 
 from models import db
 from web.views import web as web_blueprint
@@ -34,6 +35,10 @@ if os.environ.get("SENTRY_DSN"):
 
 app.register_blueprint(web_blueprint)
 app.register_blueprint(dash_blueprint)
+
+Talisman(app, content_security_policy={
+    "default-src": "*"
+})
 
 # add a timestamp-based cache buster to static files
 static_last_update = 0
@@ -68,26 +73,6 @@ def not_found(e):
 @app.errorhandler(500)
 def server_error(e):
     return render_template("500.html"), 500
-
-@app.after_request
-def apply_security_headers(response):
-
-    # don't allow the site to load in an iframe (prevents click jacking)
-    response.headers["X-Frame-Options"] = "DENY"
-
-    # don't allow browsers to auto-detect mime type
-    # they should trust the `Content-Type` header with each response
-    response.headers["X-Content-Type-Options"] = "nosniff"
-
-    # prevents the browser from rendering the page if it detects a reflected JS/XSS attack
-    # this is default behavior in most modern browsers, but good to be explicit for older browsers
-    response.headers["X-XSS-Protection"] = "1; mode=block"
-
-    # instructs the browser to make all requests to this site over SSL (aka HSTS)
-    # response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"  # one year
-
-    return response
-
 
 if __name__ == '__main__':
     app.run(debug=True)

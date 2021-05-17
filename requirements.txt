@@ -3,6 +3,7 @@ Flask-Migrate
 Flask-Script
 Flask-Session
 Flask-SQLAlchemy
+flask-talisman
 Flask-Testing
 Flask-WTF
 
