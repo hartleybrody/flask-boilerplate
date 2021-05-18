@@ -4,6 +4,7 @@ import sentry_sdk
 from flask import Flask, render_template
 from flask_session import Session
 from flask_talisman import Talisman
+from flask_migrate import Migrate
 
 from models import db
 from web.views import web as web_blueprint
@@ -39,6 +40,8 @@ app.register_blueprint(dash_blueprint)
 Talisman(app, content_security_policy={
     "default-src": "*"
 })
+
+migrate = Migrate(app, db)
 
 # add a timestamp-based cache buster to static files
 static_last_update = 0
