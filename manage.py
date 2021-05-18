@@ -10,11 +10,17 @@ from models import db, User, IntegrityError
 @app.cli.command("job")
 @click.option("-n", "--name", default="Undefined")
 def job(name):
+    """
+    A basic job to show syntax.
+    """
     print("Running custom job: {}".format(name))
 
 
 @app.cli.command("seed")
 def seed():
+    """
+    Setup an initially empty database with useful data.
+    """
     u = User(email="test@example.com", is_admin=False)
     u.set_password("foobar123")
 
@@ -26,6 +32,9 @@ def seed():
 @click.option("-e", "--email", default=None)
 @click.option("-p", "--pass", default=None)
 def admin(email, password):
+    """
+    Create an admin user.
+    """
     if not email or not password:
         return "Can't setup admin without email and password"
 
