@@ -30,13 +30,14 @@ def seed():
 
 @app.cli.command("admin")
 @click.option("-e", "--email", default=None)
-@click.option("-p", "--pass", default=None)
+@click.option("-p", "--password", default=None)
 def admin(email, password):
     """
     Create an admin user.
     """
     if not email or not password:
-        return "Can't setup admin without email and password"
+        print("Can't setup admin without --email and --password")
+        return
 
     u = User(email=email, is_admin=True)
     u.set_password(password)
