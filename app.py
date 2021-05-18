@@ -12,6 +12,8 @@ from dash.views import dash as dash_blueprint
 
 app = Flask(__name__)
 app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
+
+# setup the database
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     "connect_args": {"options": "-c timezone=utc"},  # https://stackoverflow.com/a/26106482/625840
@@ -36,6 +38,8 @@ if os.environ.get("SENTRY_DSN"):
 
 app.register_blueprint(web_blueprint)
 app.register_blueprint(dash_blueprint)
+
+from manage import job, seed, admin
 
 Talisman(app, content_security_policy={
     "default-src": "*"

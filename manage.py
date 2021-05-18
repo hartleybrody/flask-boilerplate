@@ -3,19 +3,17 @@ import json
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-from flask_script import Manager
-
+import click
 from app import app
 from models import db, User, IntegrityError
 
-manager = Manager(app)
-
-@manager.option("-n", "--name", dest="name", default="Undefined")
+@app.cli.command("job")
+@click.option("-n", "--name", default="Undefined")
 def job(name):
     print("Running custom job: {}".format(name))
 
 
-@manager.command
+@app.cli.command("seed")
 def seed():
     u = User(email="test@example.com", is_admin=False)
     u.set_password("foobar123")
@@ -24,8 +22,9 @@ def seed():
     db.session.commit()
 
 
-@manager.option("-e", "--email", dest="email", default=None)
-@manager.option("-p", "--pass", dest="password", default=None)
+@app.cli.command("admin")
+@click.option("-e", "--email", default=None)
+@click.option("-p", "--pass", default=None)
 def admin(email, password):
     if not email or not password:
         return "Can't setup admin without email and password"
