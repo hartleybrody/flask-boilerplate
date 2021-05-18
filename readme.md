@@ -36,13 +36,13 @@ Create the database locally
 ### Initial database setup
 Once you've created a brand new database, apply the existing migrations to get your database tables setup properly
 
-    python manage.py db upgrade
+    flask db upgrade
 
 Note that the current schema is defined in `models.py` and the migrations live in `migrations/versions` (see below)
 
 You'll also need to do an initial "seed" command to add some placeholder rows to the database
 
-    python manage.py seed
+    flask seed
 
 
 ### Setup local redis server
@@ -111,15 +111,15 @@ Once you've gotten SSL setup and running locally, you can add a "Hyper-Strict Tr
 ### Run database migrations
 Detect changes to `models.py` and generate a timestamped migration file
 
-    python manage.py db migrate
+    flask db migrate
 
 Once you've looked over the generated migrations file, apply the migration to your local database
 
-    python manage.py db upgrade
+    flask db upgrade
 
 To roll back the most recent migration that has been applied to the database (maybe due to errors or changes)
 
-    python manage.py db downgrade -1
+    flask db downgrade
 
 ### Testing
 You'll need to set up a separate postgres database for testing
