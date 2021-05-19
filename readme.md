@@ -16,13 +16,13 @@ This project assumes you already have [direnv](https://github.com/direnv/direnv)
 
     brew install direnv
 
-The first time you `cd` into the project directory, direnv will take a minute to set things up, including automatically creating a new virtual environment.
+The first time you `cd` into the project directory, direnv will take a minute to set things up, including automatically creating a new virtual environment. It will use python3 since this is specified in the `.envrc` file.
 
 Once it's done, install the essential libraries for this project.
 
     pip install -r requirements.txt
 
-Optional: Once installed, you can snapshot the version of each library and override the contents of that file by pinning their version numbers
+Optional: Once installed, you can snapshot the version of each library and override the contents of that file by pinning their version numbers. This is good practice to ensure you start your project with the latest version of each dependency, but then don't have to worry about new versions causing breaking changes down the line.
 
     pip freeze > requirements.txt
 
@@ -202,3 +202,13 @@ You can follow the logs for the container with
 You can "ssh into" a running container with
 
     docker exec -it web /bin/bash
+
+You can inspect the database inside the container with
+
+    docker exec -it db psql $DATABASE_URL
+
+You can inspect the cache inside the container with
+
+    docker exec -it cache redis-cli
+
+    127.0.0.1:6379> KEYS *
