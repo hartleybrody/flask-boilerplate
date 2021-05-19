@@ -166,10 +166,16 @@ Make sure you run this immediately after deploying any code that includes databa
 ## build the frontend
 Create the frontend
 
-    docker-compose up --build
+    docker-compose up
+
+Note that if you make any changes to the Dockerfile or change the requirements.txt file, you'll need to "rebuild" by adding the `--build` flag. You don't need to use this every time you bring the containers up though, since you can usually reuse the previously built images, which is much faster.
+
+     docker-compose up --build
+
+DANGER: If you really, really need to burn your environment and start from scratch (say, to reinitialize the `pgdata`docker volume for the database for some reason), you can run `docker system prune` and then `docker volume rm` the pgdata volume.
 
 ## run commands inside docker container
-Since the Docker entrypoint always starts with `flask` you can run any arbitrary flask CLI command inside the docker container by passing that command to the `docker-compose run web` prefix. For example:
+Since docker-compose specifies that the default entrypoint always starts with `flask` you can run any arbitrary flask CLI command inside the docker container by passing that command to the `docker-compose run web` prefix. For example:
 
 create a migration using the docker container
 
