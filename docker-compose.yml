@@ -10,7 +10,7 @@ services:
       - "5000:5000"
     environment:
       FLASK_ENV: development
-      DATABASE_URL: postgresql://postgres:local_pass@db/flask-boilerplate
+      DATABASE_URL: postgresql://postgres:local_pass@db/{{APP_SLUG}}
     volumes:
       - .:/flask-app
     depends_on:
@@ -23,7 +23,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: local_pass
-      POSTGRES_DB: flask-boilerplate
+      POSTGRES_DB: {{APP_SLUG}}
     volumes:
       - pgdata:/var/lib/postgresql/data
 
