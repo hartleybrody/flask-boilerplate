@@ -4,6 +4,8 @@ services:
 
   web:
     build: .
+    entrypoint: ["flask"]
+    command: ["run", "--host=0.0.0.0", "--reload"]
     ports:
       - "8000:80"  # map port 8000 on host's localhost to port 80 inside container
     env_file: .dockerenv
