@@ -156,26 +156,38 @@ To run database migrations on heroku
 
 Make sure you run this immediately after deploying any code that includes database migrations.
 
-### Setup local environment with docker
-Run `docker build` to build an image from the `Dockerfile`
+============================================================
 
-    docker build --tag {{APP_SLUG}} .
+## Alternatively, use Docker
 
-Verify the image was created by running `docker images`
 
-Then you can actually run your image as a container with
+### Setup local environment with docker compose
 
-    docker run -p 8000:80 --env-file .env --name web {{APP_SLUG}}    # todo, use docker compose instead of --env-file
+## build the frontend
+Create the frontend
 
-Add the `-d` flag just  before `{{APP_SLUG}}` to detach and run the container in the background
+    docker-compose up --build
 
-Note that the `docker run` command is equivalent to running `docker create` + `docker start` + `docker attach`
+## run commands inside docker container
+Since the Docker entrypoint always starts with `flask` you can run any arbitrary flask CLI command inside the docker container by passing that command to the `docker-compose run web` prefix. For example:
 
-Verify the container is working by running `docker ps` in a different terminal tab
+create a migration using the docker container
 
-Verify that the app loads with
+    docker-compose run web db migrate
 
-    curl localhost:8000
+run database migrations using docker
+
+    docker-compose run web db upgrade
+
+downgrade the database using docker
+
+    docker-compose run web db downgrade
+
+seed the database using... you get it.
+
+    docker-compose run web seed
+
+## other helpful docker tips & tricks
 
 You can follow the logs for the container with
 
@@ -184,4 +196,3 @@ You can follow the logs for the container with
 You can "ssh into" a running container with
 
     docker exec -it web /bin/bash
-
