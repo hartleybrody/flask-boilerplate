@@ -7,17 +7,23 @@ services:
     entrypoint: ["flask"]
     command: ["run", "--host=0.0.0.0", "--reload"]
     ports:
-      - "8000:80"  # map port 8000 on host's localhost to port 80 inside container
-    env_file: .dockerenv
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://postgres:local_pass@db/flask-boilerplate
     volumes:
       - .:/flask-app
     depends_on:
       - db
+
   db:
     image: 'postgres:13.1-alpine'
     ports:
-      - "5432"  # exposes postgresql://db:5432 within containers https://docs.docker.com/compose/networking/
-    env_file: .dockerenv
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: local_pass
+      POSTGRES_DB: flask-boilerplate
     volumes:
       - pgdata:/var/lib/postgresql/data
 
