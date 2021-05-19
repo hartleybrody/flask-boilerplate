@@ -1,4 +1,20 @@
-Actual readme for this project:
+How to use this project
+
+Create a new directory for your project and do a git checkout
+
+    mkdir -p /path/to/project && cd /path/to/project
+    git clone git@github.com:hartleybrody/flask-boilerplate.git
+
+Then you can move the files out of the `flask-boilerplate` directory and into `/path/to/project` using
+
+    cp -r flask-boilerplate/. .
+
+Finally, delete the `flask-boilerplate` directory and start it as a new git repo
+
+    rm -rf flask-boilerplate
+    rm -rf .git && git init
+    git add .
+    git commit -m "initial import from flask boilerplate"
 
 To make this template fit your app, replace the following
 
