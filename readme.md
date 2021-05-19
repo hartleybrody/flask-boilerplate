@@ -119,7 +119,7 @@ Once you've gotten SSL setup and running locally, you can add a "Hyper-Strict Tr
 ### Run database migrations
 Detect changes to `models.py` and generate a timestamped migration file
 
-    flask db migrate
+    flask db migrate -m "migration summary"
 
 Once you've looked over the generated migrations file, apply the migration to your local database
 
@@ -179,7 +179,7 @@ Since docker-compose specifies that the default entrypoint always starts with `f
 
 create a migration using the docker container
 
-    docker-compose run web db migrate
+    docker-compose run web db migrate -m "migration summary"
 
 run database migrations using docker
 
