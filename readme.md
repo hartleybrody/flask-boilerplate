@@ -12,15 +12,19 @@ To make this template fit your app, replace the following
 {{APP_BLURB}}
 
 ### Install python dependencies
-This project assumes you already have [virtualenv, virtualenvwrapper](http://docs.python-guide.org/en/latest/dev/virtualenvs/) and [autoenv](https://github.com/kennethreitz/autoenv) installed globally on your system.
+This project assumes you already have [direnv](https://github.com/direnv/direnv) installed globally on your system.
 
-First, create a new virtual environment using python3:
+    brew install direnv
 
-    mkvirtualenv -p python3 {{APP_SLUG}}
+The first time you `cd` into the project directory, direnv will take a minute to set things up, including automatically creating a new virtual environment.
 
-Then, install the required python dependencies
+Once it's done, install the essential libraries for this project.
 
     pip install -r requirements.txt
+
+Optional: Once installed, you can snapshot the version of each library and override the contents of that file by pinning their version numbers
+
+    pip freeze > requirements.txt
 
 ### Setup local postgres database
 Create the database locally
