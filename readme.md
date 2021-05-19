@@ -63,13 +63,17 @@ Once you've got redis installed on your system, start the local server in the ba
     redis-server  --daemonize yes
 
 ### Run your local server
-Ensure that the local `.env` file has been applied, then run
+Run the local flask development server (automatically reloads changes) with
 
-    python app.py
+    flask run
 
-or alternatively, use gunicorn
+or alternatively, use the production server gunicorn
 
     gunicorn app:app --reload --bind 127.0.0.1:5000
+
+Either way, your local development server should be viewable in a browser
+
+    http://localhost:5000
 
 ### Running your local server over SSL (optional)
 Running your local development server over SSL is optional but highly recommended since it makes your local env closer to prod, and allows you to catch potential content issues sooner. I recommend [mkcert](https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/) for creating browser-trusted, self-signed certificates.
@@ -148,7 +152,7 @@ To push code changes to heroku
 
 To run database migrations on heroku
 
-    heroku run python manage.py db upgrade
+    heroku run flask db upgrade
 
 Make sure you run this immediately after deploying any code that includes database migrations.
 
