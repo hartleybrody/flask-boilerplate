@@ -1,0 +1,10 @@
+DATABASE_URL=postgresql://postgres:foobar@db/flask-boilerplate
+REDIS_URL
+MAILGUN_DOMAIN
+MAILGUN_API_KEY
+SENTRY_DSN
+
+#POSTGRES_HOST_AUTH_METHOD="trust"
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=foobar
+POSTGRES_DB=flask-boilerplate
