@@ -34,6 +34,10 @@ This project assumes you already have [direnv](https://github.com/direnv/direnv)
 
 The first time you `cd` into the project directory, direnv will take a minute to set things up, including automatically creating a new virtual environment. It will use python3 since this is specified in the `.envrc` file.
 
+Note that while `.envrc` is initially provided for you, any configuration information you put in there should NOT be committed. Let's go ahead and remove it from git tracking.
+
+    git rm -r --cached .envrc
+
 Once it's done, install the essential libraries for this project.
 
     pip install -r requirements.txt
