@@ -2,3 +2,4 @@
 *.pem
 
 .direnv
+.envrc
