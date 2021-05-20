@@ -213,18 +213,20 @@ seed the database using... you get it.
 
 You can follow the logs for the container with
 
-    docker logs -f web
+    docker logs -f {{APP_SLUG}}_web_1
 
 You can "ssh into" a running container with
 
-    docker exec -it web /bin/bash
+    docker exec -it {{APP_SLUG}}_web_1 /bin/bash
 
 You can inspect the database inside the container with
 
-    docker exec -it db psql $DATABASE_URL
+    docker exec -it {{APP_SLUG}}_db_1 psql -U postgres
+
+    postgres=# \c {{APP_SLUG}}
 
 You can inspect the cache inside the container with
 
-    docker exec -it cache redis-cli
+    docker exec -it {{APP_SLUG}}_cache_1 redis-cli
 
     127.0.0.1:6379> KEYS *
