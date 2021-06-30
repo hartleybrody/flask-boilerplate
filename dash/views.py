@@ -14,8 +14,6 @@ def root():
     if False:
         return redirect(url_for(".some_other_view_function_name"))
 
-    js_init = {
+    return render_template("dash/root.html", js_init={
         "users": [u.to_dict() for u in User.query.all()]
-    }
-
-    return render_template("dash/root.html", js_init=json.dumps(js_init))
+    })
