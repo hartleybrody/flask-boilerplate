@@ -4,10 +4,10 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 
 import click
-from app import app
+
 from models import db, User, IntegrityError
 
-@app.cli.command("job")
+@click.command("job")
 @click.option("-n", "--name", default="Undefined")
 def job(name):
     """
@@ -16,7 +16,7 @@ def job(name):
     print("Running custom job: {}".format(name))
 
 
-@app.cli.command("seed")
+@click.command("seed")
 def seed():
     """
     Setup an initially empty database with useful data.
@@ -28,7 +28,7 @@ def seed():
     db.session.commit()
 
 
-@app.cli.command("admin")
+@click.command("admin")
 @click.option("-e", "--email", default=None)
 @click.option("-p", "--password", default=None)
 def admin(email, password):
@@ -59,6 +59,3 @@ def admin(email, password):
 
         return "Successfully updated the admin password for {}".format(email)
 
-
-if __name__ == '__main__':
-    manager.run()

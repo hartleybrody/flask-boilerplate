@@ -1,5 +1,6 @@
 import os
 
+import click
 import sentry_sdk
 from flask import Flask, render_template
 from flask_session import Session
@@ -39,7 +40,11 @@ if os.environ.get("SENTRY_DSN"):
 app.register_blueprint(web_blueprint)
 app.register_blueprint(dash_blueprint)
 
-from manage import job, seed, admin
+import tasks
+for name in dir(tasks):
+    item = getattr(tasks, name)
+    if type(item) == click.core.Command:
+        app.cli.add_command(item)
 
 Talisman(app, content_security_policy={
     "default-src": "*"
