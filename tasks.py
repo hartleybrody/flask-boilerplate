@@ -4,11 +4,13 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 
 import click
+from flask.cli import with_appcontext
 
 from models import db, User, IntegrityError
 
 @click.command("job")
 @click.option("-n", "--name", default="Undefined")
+@with_appcontext
 def job(name):
     """
     A basic job to show syntax.
@@ -17,6 +19,7 @@ def job(name):
 
 
 @click.command("seed")
+@with_appcontext
 def seed():
     """
     Setup an initially empty database with useful data.
@@ -31,6 +34,7 @@ def seed():
 @click.command("admin")
 @click.option("-e", "--email", default=None)
 @click.option("-p", "--password", default=None)
+@with_appcontext
 def admin(email, password):
     """
     Create an admin user.
