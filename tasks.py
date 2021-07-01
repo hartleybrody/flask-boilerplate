@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 
 import click
+from flask import current_app
 from flask.cli import with_appcontext
 
 from models import db, User, IntegrityError
@@ -15,7 +16,7 @@ def job(name):
     """
     A basic job to show syntax.
     """
-    print("Running custom job: {}".format(name))
+    current_app.logger.info("Running custom job: {}".format(name))
 
 
 @click.command("seed")
@@ -40,7 +41,7 @@ def admin(email, password):
     Create an admin user.
     """
     if not email or not password:
-        print("Can't setup admin without --email and --password")
+        current_app.logger.warning("Can't setup admin without --email and --password")
         return
 
     u = User(email=email, is_admin=True)
@@ -53,7 +54,7 @@ def admin(email, password):
         return "Successfully added {} with that password".format(email)
     except IntegrityError:
         db.session.rollback()
-        print("Admin with that email already exists, updating their password")
+        current_app.logger.warning("Admin with that email already exists, updating their password")
 
         u = User.query.filter_by(email=email).one()
         u.set_password(password)
