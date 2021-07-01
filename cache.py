@@ -28,13 +28,17 @@ class RedisCache(object):
 
     def set(self, k, v, expires=DEFAULT_EXPIRES):
         k = self._build_key(k)
-        if expires:
-            return self.connection.set(k, v, ex=int(expires))
-        return self.connection.set(k, v)
+        return self.connection.set(k, v, ex=expires)
 
     def get(self, k, default=None):
         k = self._build_key(k)
         return self.connection.get(k) or default
+
+    def set_dict(self, k, v):
+        return self.connection.hmset(k, v)
+
+    def get_dict(self, k, default=None):
+        return self.connection.hgetall(k)
 
     def delete(self, k):
         k = self._build_key(k)
