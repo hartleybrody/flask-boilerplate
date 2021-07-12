@@ -43,7 +43,9 @@
     </script>
     {% endif %}
     <script type="text/javascript" src="/static/js/base-app.js"></script>
+    {% if request.endpoint %}
     <script type="text/javascript" src="/static/js/{{ request.endpoint.replace('.', '/').replace('_', '-') }}.js?c={{config.static_last_update}}"></script>
+    {% endif %}
 
     {% block footer %}{% endblock %}
 
