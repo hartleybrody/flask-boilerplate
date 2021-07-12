@@ -38,7 +38,8 @@ class RedisCache(object):
         return self.connection.hmset(k, v)
 
     def get_dict(self, k, default=None):
-        return self.connection.hgetall(k)
+        data = self.connection.hgetall(k)
+        return { key.decode(): val.decode() for key, val in data.items() }
 
     def delete(self, k):
         k = self._build_key(k)
