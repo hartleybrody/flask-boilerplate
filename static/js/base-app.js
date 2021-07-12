@@ -16,3 +16,8 @@ BaseApp.controller('BaseController', function($scope, $timeout, $interval, $loca
         return $sce.trustAsHtml(val);
     };
 })
+.filter('round_dollars', function($sce) {
+    return function(val){
+        return (Math.round(val * 100) / 100).toFixed(2)
+    };
+})
