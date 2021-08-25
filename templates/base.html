@@ -39,7 +39,7 @@
 
     {% if js_init %}
     <script type="text/javascript">
-        window.js_init = {{ js_init | safe}}
+        window.js_init = {{ js_init | tojson}}
     </script>
     {% endif %}
     <script type="text/javascript" src="/static/js/base-app.js"></script>
