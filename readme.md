@@ -28,13 +28,17 @@ To make this template fit your app, replace the following
 {{APP_BLURB}}
 
 ### Install python dependencies
-This project assumes you already have [direnv](https://github.com/direnv/direnv) installed globally on your system.
+If this is the first time you're setting up the project, you'll need to create a new virtual environment for it.
 
-    brew install direnv
+    mkvirtualenv {{APP_SLUG}}
 
-The first time you `cd` into the project directory, direnv will take a minute to set things up, including automatically creating a new virtual environment. It will use python3 since this is specified in the `.envrc` file.
+This project assumes you already have [autoenv](https://github.com/kennethreitz/autoenv) installed globally on your system.
 
-Note that while `.envrc` is initially provided for you, any configuration information you put in there should NOT be committed. Let's go ahead and remove it from git tracking.
+    brew install autoenv
+
+The first time you `cd` into the project directory, autoenv will ask your permission to source the `.env` file.
+
+Note that while `.env` is initially provided for you, any configuration information you put in there should NOT be committed. Let's remove it from git tracking.
 
     git rm -r --cached .envrc
 
