@@ -11,11 +11,13 @@ from passlib.apps import custom_app_context as pwd_context
 db = SQLAlchemy()
 
 
-class BaseMixin(object):
+class BaseFieldsMixin(object):
     id =            db.Column(db.Integer, primary_key=True)
     created_at =    db.Column(db.DateTime, default=datetime.utcnow)
     updated_at =    db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+
+class BaseMethodsMixin(object):
     def to_dict(self):
         cols = {c.name: getattr(self, c.name) for c in self.__table__.columns}
         for k, v in cols.items():
@@ -32,6 +34,13 @@ class BaseMixin(object):
         db.session.delete(self)
         db.session.commit()
         return None
+
+
+class BaseMixin(BaseFieldsMixin, BaseMethodsMixin):
+    pass  # combine both mixins into simpler shorthand
+
+
+# Actual models
 
 
 class User(db.Model, BaseMixin):
