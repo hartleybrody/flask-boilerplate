@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
 
 toolbar = DebugToolbarExtension(app)
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 database_url = os.environ["DATABASE_URL"]
 if database_url.startswith("postgres://"):  # https://help.heroku.com/ZKNTJQSK/
