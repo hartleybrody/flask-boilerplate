@@ -14,6 +14,8 @@ from dash.views import dash as dash_blueprint
 app = Flask(__name__)
 app.secret_key = '3n13m3@n13myn13m0-{{APP_SLUG}}'
 
+toolbar = DebugToolbarExtension(app)
+
 database_url = os.environ["DATABASE_URL"]
 if database_url.startswith("postgres://"):  # https://help.heroku.com/ZKNTJQSK/
     database_url = database_url.replace("postgres://", "postgresql://", 1)
