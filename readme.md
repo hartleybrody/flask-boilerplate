@@ -113,11 +113,15 @@ Then, allow it to install a locally-trusted CA
 
 Finally, generate a certificate for the local domain you'll be using:
 
-    mkcert local.{{APP_SLUG}}.com
+    mkcert {{APP_SLUG}}.local
 
 This will generate a certificate and key in the current directory. You can move them wherever you like, just make sure to update the env variables to point to their file system location, and then uncomment out the line at the very bottom of `app.py` that tells your local server to use them.
 
     app.run(debug=True, ssl_context=(os.environ["LOCAL_SSL_CERT_PATH"], os.environ["LOCAL_SSL_KEY_PATH"]))
+
+Alternatively, you can run your local flask development server with
+
+    flask run --cert=$LOCAL_SSL_CERT_PATH --key=$LOCAL_SSL_KEY_PATH
 
 In order to access the local development server with the correct SSL certificates, you'll need to create an entry in your HOSTS file that points `local.{{APP_SLUG}}.com` at the regular loopback interface (127.0.0.1)
 
@@ -127,11 +131,11 @@ On macOS, you can add an entry to your HOSTS file with:
 
 and then append a line to the end of the file that looks like
 
-     127.0.0.1 local.{{APP_SLUG}}.com
+     127.0.0.1 {{APP_SLUG}}.local
 
 Then exit vim with the famous `esc` + `:wq` and you should be able to visit the site over SSL in your browser at
 
-    https://local.{{APP_SLUG}}.com:5000
+    https://{{APP_SLUG}}.local:5000
 
 Once you've gotten SSL setup and running locally, you can add a "Hyper-Strict Transport Security" (HSTS) header to force the browser to always request the site over SSL. Simply uncommenting out the line in app.py that looks like
 
