@@ -3,6 +3,7 @@ import os
 import click
 import sentry_sdk
 from flask import Flask, render_template
+from flask_debugtoolbar import DebugToolbarExtension
 from flask_session import Session
 from flask_talisman import Talisman
 from flask_migrate import Migrate
