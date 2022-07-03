@@ -142,8 +142,13 @@ def reset_password():
 
 @web.route('/_ping/', methods=['GET'])
 def ping():
-    u = [_ for _ in User.query.all()]  # do a DB query to ensure those work
-    return "ok"
+
+    from cache import redis
+    redis.set("ping-test", "ok")
+
+    db.session.execute("SELECT 1")
+
+    return redis.get("ping-test")
 
 @web.route('/_exception/', methods=['GET'])
 def exception():
