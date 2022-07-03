@@ -2,21 +2,6 @@ version: "3.8"
 
 services:
 
-  web:
-    build: .
-    entrypoint: ["flask"]
-    command: ["run", "--host=0.0.0.0", "--reload"]
-    ports:
-      - "5000:5000"
-    environment:
-      FLASK_ENV: development
-      DATABASE_URL: postgresql://postgres:local_pass@db/flask-boilerplate
-      REDIS_URL: redis://cache:6379
-    volumes:
-      - .:/flask-app
-    depends_on:
-      - db
-
   db:
     image: 'postgres:13.1-alpine'
     ports:
@@ -24,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: local_pass
-      POSTGRES_DB: flask-boilerplate
+      POSTGRES_DB: {{APP_SLUG}}
     volumes:
       - pgdata:/var/lib/postgresql/data
 
