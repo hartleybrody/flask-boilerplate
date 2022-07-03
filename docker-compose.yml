@@ -5,10 +5,10 @@ services:
   db:
     image: 'postgres:13.1-alpine'
     ports:
-      - "5432:5432"
+      - "5001:5432"  # map host's 127.0.0.1:5001 to default psql port inside container
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: local_pass
+      POSTGRES_PASSWORD: pass
       POSTGRES_DB: {{APP_SLUG}}
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -16,7 +16,7 @@ services:
   cache:
     image: "redis:alpine"
     ports:
-      - "6379:6379"
+      - "5002:6379"   # map host's 127.0.0.1:5002 to default redis port inside container
 
 volumes:
   pgdata:
