@@ -48,6 +48,13 @@ Create a postgres and redis database with
 
     docker-compose up
 
+Note that if you make any changes to the Dockerfile or `docker-compose.yml`, you may need to "rebuild" by adding the `--build` flag. You don't need to use this every time you bring the containers up though, since you can usually reuse the previously built images, which is much faster.
+
+     docker-compose up --build
+
+DANGER: If you really, really need to burn your environment and start from scratch (say, to reinitialize the `pgdata` docker volume for the database for some reason), you can run `docker system prune` and then `docker volume rm` the pgdata volume.
+
+
 ### Initial database setup
 Once you've created a brand new database, apply the existing migrations to get your database tables setup properly
 
@@ -110,12 +117,6 @@ Then exit vim with the famous `esc` + `:wq` and you should be able to visit the 
 
     https://{{APP_SLUG}}.local:5000
 
-Once you've gotten SSL setup and running locally, you can add a "Hyper-Strict Transport Security" (HSTS) header to force the browser to always request the site over SSL. Simply uncommenting out the line in app.py that looks like
-
-    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains
-
-**WARNING**: Once you uncomment this header and visit the site, your browser will *always* request the site over SSL for one year and there is *no way to force your browser to request the site over plain ol' HTTP*. This is a good security best practice, but can present a mucky situation if you haven't gotten the SSL setup stuff figured out.
-
 
 ### Run database migrations
 Detect changes to `models.py` and generate a timestamped migration file
@@ -156,62 +157,3 @@ To run database migrations on heroku
     heroku run flask db upgrade
 
 Make sure you run this immediately after deploying any code that includes database migrations.
-
-============================================================
-
-## Alternatively, use Docker
-
-
-### Setup local environment with docker compose
-
-## build the frontend
-Create the frontend
-
-    docker-compose up
-
-Note that if you make any changes to the Dockerfile or change the requirements.txt file, you'll need to "rebuild" by adding the `--build` flag. You don't need to use this every time you bring the containers up though, since you can usually reuse the previously built images, which is much faster.
-
-     docker-compose up --build
-
-DANGER: If you really, really need to burn your environment and start from scratch (say, to reinitialize the `pgdata` docker volume for the database for some reason), you can run `docker system prune` and then `docker volume rm` the pgdata volume.
-
-## run commands inside docker container
-Since docker-compose specifies that the default entrypoint always starts with `flask` you can run any arbitrary flask CLI command inside the docker container by passing that command to the `docker-compose run web` prefix. For example:
-
-create a migration using the docker container
-
-    docker-compose run web db migrate
-
-run database migrations using docker
-
-    docker-compose run web db upgrade
-
-downgrade the database using docker
-
-    docker-compose run web db downgrade
-
-seed the database using... you get it.
-
-    docker-compose run web seed
-
-## other helpful docker tips & tricks
-
-You can follow the logs for the container with
-
-    docker logs -f {{APP_SLUG}}_web_1
-
-You can "ssh into" a running container with
-
-    docker exec -it {{APP_SLUG}}_web_1 /bin/bash
-
-You can inspect the database inside the container with
-
-    docker exec -it {{APP_SLUG}}_db_1 psql -U postgres
-
-    postgres=# \c {{APP_SLUG}}
-
-You can inspect the cache inside the container with
-
-    docker exec -it {{APP_SLUG}}_cache_1 redis-cli
-
-    127.0.0.1:6379> KEYS *
