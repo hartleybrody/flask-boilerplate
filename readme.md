@@ -27,64 +27,37 @@ To make this template fit your app, replace the following
 # {{APP_NAME}}
 {{APP_BLURB}}
 
-### Install python dependencies
-If this is the first time you're setting up the project, you'll need to create a new virtual environment for it.
-
-    mkvirtualenv {{APP_SLUG}}
-
-This project assumes you already have [autoenv](https://github.com/kennethreitz/autoenv) installed globally on your system.
-
-    brew install autoenv
-
-The first time you `cd` into the project directory, autoenv will ask your permission to source the `.env` file.
+### Local configuration
+This project uses [python-dotenv](https://github.com/theskumar/python-dotenv) to read configuration from a `.env` file.
 
 Note that while `.env` is initially provided for you, any configuration information you put in there should NOT be committed. Let's remove it from git tracking.
 
     git rm -r --cached .env
 
-Once it's done, install the essential libraries for this project.
+### Install python dependencies
+Install the essential libraries for this project.
 
-    pip install -r requirements.txt
+    poetry install
 
-Optional: Once installed, you can snapshot the version of each library and override the contents of that file by pinning their version numbers. This is good practice to ensure you start your project with the latest version of each dependency, but then don't have to worry about new versions causing breaking changes down the line.
+This will install all of the dependencies that are defined in `pyproject.toml` -- as [also specified in the `poetry.lock` file](https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control).
 
-    pip freeze > requirements.txt
+### Setup local postgres and redis
+This project uses the pattern of having `docker-compose.yml` specify the backing services (postgres and redis databases) while letting the application run directly on the host so it's easier to interact with.
 
-### Setup local postgres database
-Create the database locally
+Create a postgres and redis database with
 
-    psql -h localhost -d postgres
-
-    psql (13.1)
-    Type "help" for help.
-
-    postgres=# CREATE DATABASE {{APP_SLUG}};
-    CREATE DATABASE
+    docker-compose up
 
 ### Initial database setup
 Once you've created a brand new database, apply the existing migrations to get your database tables setup properly
 
-    flask db upgrade
+    poetry run flask db upgrade
 
 Note that the current schema is defined in `models.py` and the migrations live in `migrations/versions` (see below)
 
 You'll also need to do an initial "seed" command to add some placeholder rows to the database
 
-    flask seed
-
-
-### Setup local redis server
-Most web applications can benefit from an in-memory cache. They're great for server-side sessions and also for taking load off the database.
-
-You can install redis using [the project's Quickstart instructions](https://redis.io/topics/quickstart).
-
-Or, if you're on macOS with homebrew, you can simply run
-
-    brew install redis
-
-Once you've got redis installed on your system, start the local server in the background with
-
-    redis-server  --daemonize yes
+    poetry run flask seed
 
 ### Run your local server
 Run the local flask development server (automatically reloads changes) with
@@ -200,7 +173,7 @@ Note that if you make any changes to the Dockerfile or change the requirements.t
 
      docker-compose up --build
 
-DANGER: If you really, really need to burn your environment and start from scratch (say, to reinitialize the `pgdata`docker volume for the database for some reason), you can run `docker system prune` and then `docker volume rm` the pgdata volume.
+DANGER: If you really, really need to burn your environment and start from scratch (say, to reinitialize the `pgdata` docker volume for the database for some reason), you can run `docker system prune` and then `docker volume rm` the pgdata volume.
 
 ## run commands inside docker container
 Since docker-compose specifies that the default entrypoint always starts with `flask` you can run any arbitrary flask CLI command inside the docker container by passing that command to the `docker-compose run web` prefix. For example:
