@@ -69,13 +69,9 @@ You'll also need to do an initial "seed" command to add some placeholder rows to
 ### Run your local server
 Run the local flask development server (automatically reloads changes) with
 
-    flask run
+    poetry run flask run
 
-or alternatively, use the production server gunicorn
-
-    gunicorn app:app --reload --bind 127.0.0.1:5000
-
-Either way, your local development server should be viewable in a browser
+Your local development server should be viewable in a browser
 
     http://localhost:5000
 
