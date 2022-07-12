@@ -24,6 +24,9 @@ Flask-Migrate = "^3.1.0"
 alembic = "^1.8.0"
 python-dotenv = "^0.20.0"
 
+[tool.poetry.scripts]
+server = "web_app.app.app:run"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
