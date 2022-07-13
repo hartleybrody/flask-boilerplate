@@ -8,71 +8,55 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="description" content="{% block description %}{% endblock %}">
 
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-      <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" type="text/css" href="/static/css/styles.css?c={{config.static_last_update}}">
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js" integrity="sha256-S67+hs95eWSvmPvrjoHXIVxdoi+xrvKB938ETkYjITA=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-cookies.min.js" integrity="sha256-T8FTGbwtRB7ssWzStY8DTo73e+azUGsOLkO/Y6v/z9U=" crossorigin="anonymous"></script>
-      <style type="text/css">
-          [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-            display: none !important;
-          }
-      </style>
+      <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" integrity="sha256-qXBd/EfAdjOA2FGrGAG+b3YBn2tn5A6bhz+LSgYD96k=" crossorigin="anonymous"></script>
+
+      <!-- https://vuetifyjs.com/en/getting-started/installation/#usage-with-cdn -->
+      <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
       {% block header %}{% endblock %}
 
     </head>
 
     <body>
-        {% block content %}{% endblock %}
+
+        <div id="app">
+            <v-app>
+
+                <app-bar session_type="anonymous" />
+
+                <v-main>
+                    <v-container>
+                        {% block content %}{% endblock %}
+                    </v-container>
+                </v-main>
+
+                <v-footer app>
+                    <!-- -->
+                </v-footer>
+            </v-app>
+
+        </div>
+
     </body>
 
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="module">
+        import AppBar from './static/js/components/app-bar.js'
 
-    {% if js_init %}
-    <script type="text/javascript">
-        window.js_init = {{ js_init | tojson}}
+        Vue.component('AppBar', AppBar);
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+        })
     </script>
-    {% endif %}
-    <script type="text/javascript" src="/static/js/base-app.js"></script>
-    {% if request.endpoint %}
-    <script type="text/javascript" src="/static/js/{{ request.endpoint.replace('.', '/').replace('_', '-') }}.js?c={{config.static_last_update}}"></script>
-    {% endif %}
 
     {% block footer %}{% endblock %}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js" integrity="sha256-Wdie7xDu6PuVG6BqNy/dEEYY0jK2JutDYnn0sI19yTw=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.nonblock.js" integrity="sha256-XL9Jpf+ZGjO3i0L4cRvavUoRP8V2S4Jt4zCqPJUoeXU=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" integrity="sha256-d0mtrHsQZQe2+DIl6Z+F1rVWLI++ycF3BEXQUWf04xs=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.nonblock.css" integrity="sha256-o6ar29qJKgTZSqmuIUGCZdp27NsrGqdAZHtvxNffV8o=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" integrity="sha256-9YAuB2VnFZNJ+lKfpaQ3dKQT9/C0j3VUla76hHbiVF8=" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    PNotify.prototype.options.styling = "bootstrap3";
-    PNotify.prototype.options.delay = 2500;
-    $(function(){
-        {% for category, message in messages %}
-            new PNotify({
-                title: "{{category|capitalize}}",
-                text: "{{message}}",
-                type: "{{category}}",
-                nonblock: {
-                    nonblock: true
-                }
-            });
-      {% endfor %}
-    });
-    {% endwith %}
-    </script>
 
     <!-- insert google analytics here -->
 
