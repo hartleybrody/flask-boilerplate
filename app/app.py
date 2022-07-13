@@ -54,9 +54,9 @@ for name in dir(tasks):
     if type(item) == click.core.Command:
         app.cli.add_command(item)
 
-Talisman(app, content_security_policy={
-    "default-src": "*"
-})
+# Talisman(app, content_security_policy={
+#     "default-src": "*"
+# })
 
 migrate = Migrate(app, db)
 
