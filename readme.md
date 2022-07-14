@@ -71,6 +71,8 @@ Run the local flask development server (automatically reloads changes) with
 
     poetry run flask run
 
+Note that you'll need to first `cd` into the directory that contains app.py (using `cd app`) for this command to work.
+
 Your local development server should be viewable in a browser
 
     http://localhost:5000
