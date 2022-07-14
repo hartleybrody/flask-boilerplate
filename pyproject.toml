@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "flask-boilerplate"
+name = "{{APP_SLUG}}"
 version = "0.1.0"
-description = "boilerplate for starting a flask web application"
+description = "{{APP_BLURB}}"
 authors = ["Hartley Brody <hartley.brody@gmail.com>"]
 
 [tool.poetry.dependencies]
